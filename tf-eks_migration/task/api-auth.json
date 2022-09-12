@@ -1,0 +1,84 @@
+[
+  {
+    "name": "app",
+    "image": "${public.ecr.api-auth}",
+    "cpu": 256,
+    "memoryReservation": 512,
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "hostPort": 5000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SERVICE_NAME",
+        "value": "api-auth"
+      },
+      {
+        "name": "URL_PREFIX",
+        "value": "/auth/v1"
+      },
+      {
+        "name": "ENV",
+        "value": "${public.environment}"
+      },
+      {
+        "name": "AWS_REGION",
+        "value": "${public.region}"
+      },
+      {
+        "name": "AWS_KEY_ID",
+        "value": "${secret.api-auth.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_KEY_SECRET",
+        "value": "${secret.api-auth.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "CLIENT_ID",
+        "value": "${cognito-client-id}"
+      },
+      {
+        "name": "USER_POOL_ID",
+        "value": "${cognito-user-pool-id}"
+      },
+      {
+        "name": "OAUTH_URL",
+        "value": "${public.cognito.oauth_url}"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${db_host}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "hacker"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-auth"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]

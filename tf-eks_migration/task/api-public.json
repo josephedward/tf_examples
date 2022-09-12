@@ -1,0 +1,106 @@
+[
+  {
+    "name": "datadog-agent",
+    "image": "datadog/agent:latest",
+    "essential": true,
+    "environment": [
+      {
+        "name": "DD_API_KEY",
+        "value": "****************"
+      },
+      {
+        "name": "ECS_FARGATE",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "name": "app",
+    "image": "${public.ecr.api-public}",
+    "portMappings": [
+      {
+        "containerPort": 6000,
+        "hostPort": 6000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SERVICE_NAME",
+        "value": "api-public"
+      },
+      {
+        "name": "URL_PREFIX",
+        "value": "/v1"
+      },
+      {
+        "name": "PUBLIC_API_URL",
+        "value": "${public.urls.public}"
+      },
+      {
+        "name": "AWS_ACCESS_KEY",
+        "value": "${secret.api-hacker.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET",
+        "value": "${secret.api-hacker.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "COGNITO_REGION",
+        "value": "${public.region}"
+      },
+      {
+        "name": "COGNITO_POOL",
+        "value": "${public.cognito.user_pool_id}"
+      },
+      {
+        "name": "COGNITO_CLIENT_ID",
+        "value": "${public.cognito.client_id}"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "hacker"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "ENV",
+        "value": "${public.environment}"
+      },
+      {
+        "name": "PORT",
+        "value": "6000"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-public"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": [],
+    "dockerLabels": {
+      "com.datadoghq.ad.instances": "[{\"host\": \"%%host%%\", \"port\": 6000}]",
+      "com.datadoghq.ad.check_names": "[\"api-public\"]",
+      "com.datadoghq.ad.init_configs": "[{}]"
+    }
+  }
+]

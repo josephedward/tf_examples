@@ -1,0 +1,25 @@
+pr: none
+trigger:
+  branches:
+    include:
+      - "*"
+  paths:
+    # include:
+    #   - azdevops
+    exclude:
+      - README.md
+      # - CHANGELOG.md
+      # - Makefile
+
+variables:
+  - group: common-vars
+    
+pool:
+  vmImage: $(POOL_IMAGE)
+
+# steps:
+# - task: UseDotNet@2
+#   inputs:
+#     version: '3.0.x'
+#     packageType: runtime
+    

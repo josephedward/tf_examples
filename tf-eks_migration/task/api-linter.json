@@ -1,0 +1,68 @@
+[
+  {
+    "name": "app",
+    "image": "${public.ecr.api-linter}",
+    "cpu": 512,
+    "memoryReservation": 1024,
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "hostPort": 5000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SERVICE_NAME",
+        "value": "api-linter"
+      },
+      {
+        "name": "URL_PREFIX",
+        "value": "/linter/v1"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "hacker"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.api-linter.redis_url}"
+      },
+      {
+        "name": "REDIS_FILE_EXPIRE",
+        "value": "604800"
+      },
+      {
+        "name": "LAMBDA_ACCESS_API_KEY",
+        "value": "${secret.lambda-access-api-key}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-linter"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]

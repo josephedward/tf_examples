@@ -1,0 +1,164 @@
+[
+  {
+    "name": "app",
+    "image": "${public.ecr.api-hacker}",
+    "cpu": 256,
+    "memoryReservation": 512,
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "hostPort": 5000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SERVICE_NAME",
+        "value": "api-hacker"
+      },
+      {
+        "name": "URL_PREFIX",
+        "value": "/hacker/v1"
+      },
+      {
+        "name": "API_PUBLIC_URL",
+        "value": "${public.private_urls.public-full}"
+      },
+      {
+        "name": "API_HACKER_URL",
+        "value": "${public.api-hacker.internal_url}"
+      },
+      {
+        "name": "API_TEST_ENGINE_URL",
+        "value": "${public.api-test-engine.internal_url}"
+      },
+      {
+        "name": "AWS_ACCESS_KEY",
+        "value": "${secret.api-hacker.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET",
+        "value": "${secret.api-hacker.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "hacker"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "COGNITO_REGION",
+        "value": "${public.region}"
+      },
+      {
+        "name": "COGNITO_POOL",
+        "value": "${public.cognito.user_pool_id}"
+      },
+      {
+        "name": "COGNITO_CLIENT_ID",
+        "value": "${public.cognito.client_id}"
+      },
+      {
+        "name": "COGNITO_CALLBACK_URLS",
+        "value": "${public.cognito.callback_urls}"
+      },
+      {
+        "name": "COGNITO_LOGOUT_URLS",
+        "value": "${public.cognito.logout_urls}"
+      },
+      {
+        "name": "STRIPE_API_KEY",
+        "value": "${secret.stripe.api_key}"
+      },
+      {
+        "name": "WWW_URL",
+        "value": "${public.www.url}"
+      },
+      {
+        "name": "LAMBDA_ACCESS_API_KEY",
+        "value": "${secret.lambda-reminder-emails.api_key}"
+      },
+      {
+        "name": "CODE_SUBMISSION_S3_BUCKET",
+        "value": "${public.s3.codesubmission_bucket}"
+      },
+      {
+        "name": "ENV",
+        "value": "${public.environment}"
+      },
+      {
+        "name": "APP_URL",
+        "value": "${public.urls.app_full}"
+      },
+      {
+        "name": "GITHUB_APP_IDENTIFIER",
+        "value": "${public.api-hacker.github_app_identifier}"
+      },
+      {
+        "name": "GITHUB_WEBHOOK_SECRET",
+        "value": "${public.api-hacker.github_webhook_secret}"
+      },
+      {
+        "name": "SLACK_CLIENT_ID",
+        "value": "${secret.slack.client_id}"
+      },
+      {
+        "name": "SLACK_CLIENT_SECRET",
+        "value": "${secret.slack.client_secret}"
+      },
+      {
+        "name": "SLACK_SIGNING_SECRET",
+        "value": "${secret.slack.signing_secret}"
+      },
+      {
+        "name": "MAILCHIMP_SERVER",
+        "value": "${secret.mailchimp.server}"
+      },
+      {
+        "name": "LIST_ID",
+        "value": "${secret.mailchimp.list_id}"
+      },
+      {
+        "name": "MAILCHIMP_TOKEN",
+        "value": "${secret.mailchimp.token}"
+      },
+      {
+        "name": "MICROSOFT_APP_CLIENT_ID",
+        "value": "${secret.microsoft_teams.app_client_id}"
+      },
+      {
+        "name": "MICROSOFT_APP_SECRET",
+        "value": "${secret.microsoft_teams.app_secret}"
+      },
+      {
+        "name": "MICROSOFT_TEAMS_CATALOGUE_APP_ID",
+        "value": "${secret.microsoft_teams.catalogue_app_id}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-hacker"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]

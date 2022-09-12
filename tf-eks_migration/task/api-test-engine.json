@@ -1,0 +1,460 @@
+[
+  {
+    "name": "app",
+    "image": "${public.ecr.test-engine-api}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "hostPort": 5000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SERVICE_NAME",
+        "value": "api-test-engine"
+      },
+      {
+        "name": "URL_PREFIX",
+        "value": "/test-engine/v1"
+      },
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-west-2"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.test-engine.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.test-engine.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.test-engine.redis_url}"
+      },
+      {
+        "name": "QUEUES",
+        "value": "test"
+      },
+      {
+        "name": "ROUTER_URL",
+        "value": "${public.router.control_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-test-engine"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  },
+  {
+    "name": "worker1",
+    "image": "${public.ecr.test-engine-worker}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [],
+    "environment": [
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-west-2"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.test-engine.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.test-engine.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.test-engine.redis_url}"
+      },
+      {
+        "name": "QUEUES",
+        "value": "test"
+      },
+      {
+        "name": "ROUTER_URL",
+        "value": "${public.router.control_url}"
+      },
+      {
+        "name": "WTF_CSRF_ENABLED",
+        "value": "True"
+      },
+      {
+        "name": "AWS_USERNAME",
+        "value": "hackedu-test-engine"
+      },
+      {
+         "name": "WORKER_NAME",
+         "value": "worker1"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "sandboxes"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "HACKER_API_URL",
+        "value": "${public.api-hacker.internal_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-test-engine"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  },
+  {
+    "name": "worker2",
+    "image": "${public.ecr.test-engine-worker}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [],
+    "environment": [
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-west-2"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.test-engine.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.test-engine.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.test-engine.redis_url}"
+      },
+      {
+        "name": "QUEUES",
+        "value": "test"
+      },
+      {
+        "name": "ROUTER_URL",
+        "value": "${public.router.control_url}"
+      },
+      {
+        "name": "WTF_CSRF_ENABLED",
+        "value": "True"
+      },
+      {
+        "name": "AWS_USERNAME",
+        "value": "hackedu-test-engine1"
+      },
+      {
+         "name": "WORKER_NAME",
+         "value": "worker2"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "sandboxes"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "HACKER_API_URL",
+        "value": "${public.api-hacker.internal_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-test-engine"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  },
+  {
+    "name": "worker3",
+    "image": "${public.ecr.test-engine-worker}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [],
+    "environment": [
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-west-2"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.test-engine.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.test-engine.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.test-engine.redis_url}"
+      },
+      {
+        "name": "QUEUES",
+        "value": "test"
+      },
+      {
+        "name": "ROUTER_URL",
+        "value": "${public.router.control_url}"
+      },
+      {
+        "name": "WTF_CSRF_ENABLED",
+        "value": "True"
+      },
+      {
+        "name": "AWS_USERNAME",
+        "value": "hackedu-test-engine2"
+      },
+      {
+         "name": "WORKER_NAME",
+         "value": "worker3"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "sandboxes"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "HACKER_API_URL",
+        "value": "${public.api-hacker.internal_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-test-engine"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  },
+  {
+    "name": "worker4",
+    "image": "${public.ecr.test-engine-worker}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [],
+    "environment": [
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-west-2"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.test-engine.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.test-engine.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.test-engine.redis_url}"
+      },
+      {
+        "name": "QUEUES",
+        "value": "test"
+      },
+      {
+        "name": "ROUTER_URL",
+        "value": "${public.router.control_url}"
+      },
+      {
+        "name": "WTF_CSRF_ENABLED",
+        "value": "True"
+      },
+      {
+        "name": "AWS_USERNAME",
+        "value": "hackedu-test-engine3"
+      },
+      {
+         "name": "WORKER_NAME",
+         "value": "worker4"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "sandboxes"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "HACKER_API_URL",
+        "value": "${public.api-hacker.internal_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-test-engine"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  },
+  {
+    "name": "worker5",
+    "image": "${public.ecr.test-engine-worker}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [],
+    "environment": [
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-west-2"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.test-engine.AWS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.test-engine.AWS_KEY_SECRET}"
+      },
+      {
+        "name": "REDIS_URL",
+        "value": "${public.test-engine.redis_url}"
+      },
+      {
+        "name": "QUEUES",
+        "value": "test"
+      },
+      {
+        "name": "ROUTER_URL",
+        "value": "${public.router.control_url}"
+      },
+      {
+        "name": "WTF_CSRF_ENABLED",
+        "value": "True"
+      },
+      {
+        "name": "AWS_USERNAME",
+        "value": "hackedu-test-engine4"
+      },
+      {
+         "name": "WORKER_NAME",
+         "value": "worker5"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "sandboxes"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "HACKER_API_URL",
+        "value": "${public.api-hacker.internal_url}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-test-engine"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]

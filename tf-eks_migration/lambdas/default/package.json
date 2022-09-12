@@ -1,0 +1,13 @@
+{
+  "name": "@hackedu/reminder_emails",
+  "version": "1.0.2",
+  "description": "Lambda function to send reminder emails.",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "matt@hackedu.io",
+  "license": "UNLICENSED",
+  "dependencies": {}
+}

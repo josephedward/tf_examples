@@ -1,0 +1,32 @@
+[
+  {
+    "name": "proxy-http",
+    "image": "${public.ecr.proxy-http}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000,
+        "protocol": "tcp"
+      },
+      {
+        "containerPort": 8080,
+        "hostPort": 8080,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform/router",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "proxy-http"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]

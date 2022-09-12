@@ -1,0 +1,72 @@
+[
+  {
+    "name": "proxy-socketio",
+    "image": "${public.ecr.proxy-socketio}",
+    "cpu": 256,
+    "memoryReservation": 512,
+    "portMappings": [
+      {
+        "containerPort": 3001,
+        "hostPort": 3001,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SANDBOX_HTTP_HOST",
+        "value": "${public.sandbox_domain}"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "value": "${public.environment}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform/router",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "proxy-socketio"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  },
+  {
+    "name": "api-sandbox",
+    "image": "${public.ecr.api-sandbox}",
+    "cpu": 128,
+    "memoryReservation": 256,
+    "portMappings": [],
+    "environment": [
+      {
+        "name": "ENABLE_SANDBOX_WARMING",
+        "value": "${public.router.enable_sandbox_warming}"
+      },
+      {
+        "name": "ECS_CLUSTER",
+        "value": "${public.router.ecs_cluster}"
+      },
+      {
+        "name": "WAIT_TIMEOUT",
+        "value": "${public.router.wait_timeout}"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "value": "${public.environment}"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform/router",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "proxy-socketio"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]

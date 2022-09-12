@@ -1,0 +1,96 @@
+[
+  {
+    "name": "app",
+    "image": "${public.ecr.api-health}",
+    "cpu": 256,
+    "memoryReservation": 512,
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "hostPort": 5000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "SERVICE_NAME",
+        "value": "api-health"
+      },
+      {
+        "name": "URL_PREFIX",
+        "value": "/health/v1"
+      },
+      {
+        "name": "DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "DB_NAME",
+        "value": "hacker"
+      },
+      {
+        "name": "DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "SANDBOX_DB_HOST",
+        "value": "${public.rds.platform.url}"
+      },
+      {
+        "name": "SANDBOX_DB_NAME",
+        "value": "sandboxes"
+      },
+      {
+        "name": "SANDBOX_DB_PASS",
+        "value": "${secret.db-platform.pass}"
+      },
+      {
+        "name": "SANDBOX_DB_PORT",
+        "value": "${secret.db-platform.port}"
+      },
+      {
+        "name": "SANDBOX_DB_USER",
+        "value": "${secret.db-platform.user}"
+      },
+      {
+        "name": "ENV",
+        "value": "${public.environment}"
+      },
+      {
+        "name": "LAMBDA_ACCESS_API_KEY",
+        "value": "${secret.lambda-health.api_key}"
+      },
+      {
+        "name": "AWS_ACCESS_KEY_ID",
+        "value": "${secret.api-health.AWS_ACCESS_KEY_ID}"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "value": "${secret.api-health.AWS_SECRET_ACCESS_KEY}"
+      },
+      {
+        "name": "AWS_DEFAULT_REGION",
+        "value": "us-east-1"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/hackedu/platform",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "api-health"
+      }
+    },
+    "essential": true,
+    "mountPoints": [],
+    "volumesFrom": []
+  }
+]
